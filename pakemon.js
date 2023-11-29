@@ -4,48 +4,75 @@ function getRandomChoice() {
 }
 
 
-function updateUI(userChoice, compChoice, userScore, compScore) {
-    showImg1.src = `image/${userChoice}.png`;
-    showImg2.src = `image/${compChoice}.png`;
-
-    if (userScore > compScore) {
-        userResult1.textContent = "WIN";
-        userResult1.style.color = "green";
-        compResult2.textContent = "LOSE";
-        compResult2.style.color = "red";
-    } else if (userScore < compScore) {
-        userResult1.textContent = "LOSE";
-        userResult1.style.color = "red";
-        compResult2.textContent = "WIN";
-        compResult2.style.color = "green";
-    } else {
-        userResult1.textContent = "DRAW";
-        userResult1.style.color = "gray";
-        compResult2.textContent = "DRAW";
-        compResult2.style.color = "gray";
-    }
-
-    cardPoint1.textContent = userScore;
-    cardPoint2.textContent = compScore;
-}
-
 function resultGame(u, c) {
     console.log("User Choice:", u);
     console.log("Computer Choice:", c);
+    showImg1.src = `image/${u}.png`;
+    showImg2.src = `image/${c}.png`;
 
-    if (u === "w" && c === "f") {
-        firstPlayerPoint += 1;
-    } else if (u === "f" && c === "e") {
-        firstPlayerPoint += 1;
-    } else if (u === "e" && c === "w") {
-        firstPlayerPoint += 1;
-    } else if (u === c) {
+    switch (true) {
+        case u === "w" && c === "f":
+            alert("You Win: WATER wins FIRE");
+            firstPlayerPoint += 1;
+            cardPoint1.innerHTML = firstPlayerPoint
 
-    } else {
-        secondPlayerPoint += 1;
+            userResult1.innerHTML = "WIN"
+                //!eger adi style color vermek lazimdirsa bele yaziriq.
+            userResult1.style.color = "green"
+
+            //!bunu bootstrap oldugu ucun bele yazdim
+            // userResult1.classList.add("text-seccess");
+
+            compResult2.innerHTML = "Lose";
+            compResult2.style.color = "red"
+
+            break;
+        case u === "f" && c === "e":
+            alert("You Win: FIRE wins ELECTRIC");
+            firstPlayerPoint += 1;
+            cardPoint1.innerHTML = firstPlayerPoint
+
+            userResult1.innerHTML = "WIN"
+            userResult1.style.color = "green"
+
+
+            compResult2.innerHTML = "Lose";
+            compResult2.style.color = "red"
+            break;
+        case u === "e" && c === "w":
+            alert("You Win: ELECTRIC wins WATER");
+            firstPlayerPoint += 1;
+            cardPoint1.innerHTML = firstPlayerPoint
+
+            userResult1.innerHTML = "WIN"
+            userResult1.style.color = "gren"
+
+
+            compResult2.innerHTML = "Lose";
+            compResult2.style.color = "red"
+
+            break;
+        case u === c:
+            alert("Game ending in a DRAW");
+
+            userResult1.innerHTML = "Draw";
+            userResult1.style.color = "gray"
+
+            compResult2.innerHTML = "Draw";
+            compResult2.style.color = "gray"
+
+            break;
+        default:
+            alert("You are defeated.");
+            secondPlayerPoint += 1;
+            cardPoint2.innerHTML = secondPlayerPoint
+
+            compResult2.innerHTML = "WIN"
+            compResult2.style.color = "green"
+
+            userResult1.innerHTML = "Lose"
+            userResult1.style.color = "red"
     }
-
-    updateUI(u, c, firstPlayerPoint, secondPlayerPoint);
 }
 
 
